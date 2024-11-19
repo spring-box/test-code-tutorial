@@ -12,12 +12,20 @@ public class CalculatorV1 {
         } else if ("*".equals(operator)) {
             return firstOperand * secondOperand;
         } else if ("/".equals(operator)) {
-            if (secondOperand == 0) {
-                throw new NotDividedZeroException();
-            }
+            validateDivisor(secondOperand);
             return firstOperand / secondOperand;
         }
         return 0;
+    }
+
+    private static void validateDivisor(int secondOperand) {
+        if (isZero(secondOperand)) {
+            throw new NotDividedZeroException();
+        }
+    }
+
+    private static boolean isZero(int divisor) {
+        return divisor == 0;
     }
 
 }
