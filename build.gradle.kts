@@ -1,11 +1,6 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.3.5"
-    id("io.spring.dependency-management") version "1.1.6"
 }
-
-group = "io.springbox"
-version = "0.0.1-SNAPSHOT"
 
 java {
     toolchain {
@@ -13,16 +8,26 @@ java {
     }
 }
 
-repositories {
-    mavenCentral()
+allprojects {
+    group = "io.springbox"
+    version = "0.0.1-SNAPSHOT"
+
+    repositories { mavenCentral() }
+
+    tasks.withType<Test> { useJUnitPlatform() }
 }
 
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
+subprojects {
+    apply(plugin = "java")
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+    configurations {
+        compileOnly {
+            extendsFrom(configurations.annotationProcessor.get())
+        }
+    }
+
+    dependencies {
+        compileOnly("org.projectlombok:lombok:1.18.30")
+        annotationProcessor("org.projectlombok:lombok:1.18.30")
+    }
 }
