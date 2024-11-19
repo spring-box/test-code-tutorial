@@ -51,4 +51,17 @@ class CalculatorV1Test {
         assertThat(actual).isEqualTo(firstOperand * secondOperand);
     }
 
+    @Test
+    @DisplayName("나눗셈 연산")
+    void division() {
+        // Given
+        final String operator = "/";
+
+        // When
+        final int actual = CalculatorV1.calculate(firstOperand, operator, secondOperand);
+
+        // Then
+        assertThat(actual).isEqualTo(firstOperand / secondOperand);
+    }
+
 }
