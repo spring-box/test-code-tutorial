@@ -38,4 +38,17 @@ class CalculatorV1Test {
         assertThat(actual).isEqualTo(firstOperand - secondOperand);
     }
 
+    @Test
+    @DisplayName("곱셈 연산")
+    void multiply() {
+        // Given
+        final String operator = "*";
+
+        // When
+        final int actual = CalculatorV1.calculate(firstOperand, operator, secondOperand);
+
+        // Then
+        assertThat(actual).isEqualTo(firstOperand * secondOperand);
+    }
+
 }

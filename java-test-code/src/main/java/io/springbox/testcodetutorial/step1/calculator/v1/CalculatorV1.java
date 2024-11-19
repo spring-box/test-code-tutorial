@@ -7,6 +7,8 @@ public class CalculatorV1 {
             return firstOperand + secondOperand;
         } else if ("-".equals(operator)) {
             return firstOperand - secondOperand;
+        } else if ("*".equals(operator)) {
+            return firstOperand * secondOperand;
         }
 
         return 0;
