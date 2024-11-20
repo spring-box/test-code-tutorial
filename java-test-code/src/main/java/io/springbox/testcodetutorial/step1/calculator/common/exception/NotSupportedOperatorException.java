@@ -1,4 +1,4 @@
-package io.springbox.testcodetutorial.step1.calculator.v1.exception;
+package io.springbox.testcodetutorial.step1.calculator.common.exception;
 
 public class NotSupportedOperatorException extends RuntimeException {
 

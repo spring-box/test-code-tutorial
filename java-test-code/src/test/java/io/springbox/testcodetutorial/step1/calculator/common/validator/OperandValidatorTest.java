@@ -1,9 +1,9 @@
-package io.springbox.testcodetutorial.step1.calculator.v1.validator;
+package io.springbox.testcodetutorial.step1.calculator.common.validator;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import io.springbox.testcodetutorial.step1.calculator.v1.exception.IsNotPositiveOperandException;
+import io.springbox.testcodetutorial.step1.calculator.common.exception.IsNotPositiveOperandException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;

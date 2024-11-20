@@ -1,7 +1,7 @@
-package io.springbox.testcodetutorial.step1.calculator.v1.validator;
+package io.springbox.testcodetutorial.step1.calculator.common.validator;
 
-import io.springbox.testcodetutorial.step1.calculator.v1.exception.IsNotPositiveOperandException;
-import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotDividedZeroException;
+import io.springbox.testcodetutorial.step1.calculator.common.exception.IsNotPositiveOperandException;
+import io.springbox.testcodetutorial.step1.calculator.common.exception.NotDividedZeroException;
 import java.util.Arrays;
 
 public class OperandValidator {

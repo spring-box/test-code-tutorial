@@ -3,9 +3,10 @@ package io.springbox.testcodetutorial.step1.calculator.v1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import io.springbox.testcodetutorial.step1.calculator.v1.exception.IsNotPositiveOperandException;
-import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotDividedZeroException;
-import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotSupportedOperatorException;
+import io.springbox.testcodetutorial.step1.calculator.Calculator;
+import io.springbox.testcodetutorial.step1.calculator.common.exception.IsNotPositiveOperandException;
+import io.springbox.testcodetutorial.step1.calculator.common.exception.NotDividedZeroException;
+import io.springbox.testcodetutorial.step1.calculator.common.exception.NotSupportedOperatorException;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +18,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("V1:사칙 연산 계산기")
 class CalculatorV1Test {
+
+    private final Calculator sut = new CalculatorV1();
 
     private static Stream<Arguments> calculate() {
         final int firstOperand = 6;
@@ -52,7 +55,7 @@ class CalculatorV1Test {
         int expected
     ) {
         // When
-        int actual = CalculatorV1.calculate(firstOperand, operator, secondOperand);
+        int actual = sut.calculate(firstOperand, operator, secondOperand);
 
         // Then
         assertThat(actual).isEqualTo(expected);
@@ -68,7 +71,7 @@ class CalculatorV1Test {
 
         // When & Then
         assertThatExceptionOfType(NotDividedZeroException.class)
-            .isThrownBy(() -> CalculatorV1.calculate(firstOperand, operator, secondOperand));
+            .isThrownBy(() -> sut.calculate(firstOperand, operator, secondOperand));
     }
 
     @ParameterizedTest
@@ -81,7 +84,7 @@ class CalculatorV1Test {
     ) {
         // When & Then
         assertThatExceptionOfType(IsNotPositiveOperandException.class)
-            .isThrownBy(() -> CalculatorV1.calculate(firstOperand, operator, secondOperand));
+            .isThrownBy(() -> sut.calculate(firstOperand, operator, secondOperand));
     }
 
     @ParameterizedTest
@@ -94,7 +97,7 @@ class CalculatorV1Test {
 
         // When & Then
         assertThatExceptionOfType(NotSupportedOperatorException.class)
-            .isThrownBy(() -> CalculatorV1.calculate(firstOperand, given, secondOperand));
+            .isThrownBy(() -> sut.calculate(firstOperand, given, secondOperand));
     }
 
 }

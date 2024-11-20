@@ -1,13 +1,14 @@
 package io.springbox.testcodetutorial.step1.calculator.v1;
 
-import static io.springbox.testcodetutorial.step1.calculator.v1.validator.OperandValidator.validateDivisor;
-import static io.springbox.testcodetutorial.step1.calculator.v1.validator.OperandValidator.validateOperandIsPositive;
+import static io.springbox.testcodetutorial.step1.calculator.common.validator.OperandValidator.validateDivisor;
+import static io.springbox.testcodetutorial.step1.calculator.common.validator.OperandValidator.validateOperandIsPositive;
 
-import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotSupportedOperatorException;
+import io.springbox.testcodetutorial.step1.calculator.Calculator;
+import io.springbox.testcodetutorial.step1.calculator.common.exception.NotSupportedOperatorException;
 
-public class CalculatorV1 {
+public class CalculatorV1 implements Calculator {
 
-    public static int calculate(int firstOperand, String operator, int secondOperand) {
+    public int calculate(int firstOperand, String operator, int secondOperand) {
         validateOperandIsPositive(firstOperand, secondOperand);
 
         if ("+".equals(operator)) {
