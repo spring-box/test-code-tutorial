@@ -3,6 +3,8 @@ package io.springbox.testcodetutorial.step1.calculator.v1;
 import static io.springbox.testcodetutorial.step1.calculator.v1.validator.OperandValidator.validateDivisor;
 import static io.springbox.testcodetutorial.step1.calculator.v1.validator.OperandValidator.validateOperandIsPositive;
 
+import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotSupportedOperatorException;
+
 public class CalculatorV1 {
 
     public static int calculate(int firstOperand, String operator, int secondOperand) {
@@ -17,8 +19,9 @@ public class CalculatorV1 {
         } else if ("/".equals(operator)) {
             validateDivisor(secondOperand);
             return firstOperand / secondOperand;
+        } else {
+            throw new NotSupportedOperatorException(operator);
         }
-        return 0;
     }
 
 }

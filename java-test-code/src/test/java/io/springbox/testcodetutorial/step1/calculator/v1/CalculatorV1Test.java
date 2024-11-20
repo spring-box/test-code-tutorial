@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import io.springbox.testcodetutorial.step1.calculator.v1.exception.IsNotPositiveOperandException;
 import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotDividedZeroException;
+import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotSupportedOperatorException;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("V1:사칙 연산 계산기")
 class CalculatorV1Test {
@@ -80,6 +82,19 @@ class CalculatorV1Test {
         // When & Then
         assertThatExceptionOfType(IsNotPositiveOperandException.class)
             .isThrownBy(() -> CalculatorV1.calculate(firstOperand, operator, secondOperand));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"%", "^"})
+    @DisplayName("[예외] 사칙 연산자가 아닌 경우")
+    void throwException_whenIsNotSupportedOperator(String given) {
+        // Given
+        final int firstOperand = 6;
+        final int secondOperand = 3;
+
+        // When & Then
+        assertThatExceptionOfType(NotSupportedOperatorException.class)
+            .isThrownBy(() -> CalculatorV1.calculate(firstOperand, given, secondOperand));
     }
 
 }
