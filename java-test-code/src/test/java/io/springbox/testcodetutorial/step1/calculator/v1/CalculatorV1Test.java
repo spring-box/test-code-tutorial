@@ -3,7 +3,9 @@ package io.springbox.testcodetutorial.step1.calculator.v1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import io.springbox.testcodetutorial.step1.calculator.v1.exception.IsNotPositiveOperandException;
 import io.springbox.testcodetutorial.step1.calculator.v1.exception.NotDividedZeroException;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,18 @@ class CalculatorV1Test {
             Arguments.of(firstOperand, "*", secondOperand, firstOperand * secondOperand),
             Arguments.of(firstOperand, "/", secondOperand, firstOperand / secondOperand)
         );
+    }
+
+    private static Stream<Arguments> throwException_whenOperandIsNotPositive() {
+        final List<String> operators = List.of("+", "-", "*", "/");
+        final int negativeOperand = -1;
+        final int positiveOperand = 1;
+
+        return operators.stream()
+            .flatMap(operator -> Stream.of(
+                Arguments.of(negativeOperand, operator, positiveOperand),
+                Arguments.of(positiveOperand, operator, negativeOperand)
+            ));
     }
 
     @ParameterizedTest(name = "[{index}] : {0}{1}{2}={3}")
@@ -52,6 +66,19 @@ class CalculatorV1Test {
 
         // When & Then
         assertThatExceptionOfType(NotDividedZeroException.class)
+            .isThrownBy(() -> CalculatorV1.calculate(firstOperand, operator, secondOperand));
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("[예외] 피 연산자가 양수가 아닌 경우")
+    void throwException_whenOperandIsNotPositive(
+        int firstOperand,
+        String operator,
+        int secondOperand
+    ) {
+        // When & Then
+        assertThatExceptionOfType(IsNotPositiveOperandException.class)
             .isThrownBy(() -> CalculatorV1.calculate(firstOperand, operator, secondOperand));
     }
 
