@@ -1,10 +1,10 @@
 package io.springbox.testcodetutorial.step1.calculator.v2;
 
-import static io.springbox.testcodetutorial.step1.calculator.common.validator.OperandValidator.validateDivisor;
-
 import io.springbox.testcodetutorial.step1.calculator.Calculator;
 import io.springbox.testcodetutorial.step1.calculator.common.exception.NotSupportedOperatorException;
+import io.springbox.testcodetutorial.step1.calculator.v2.domain.Operator;
 import io.springbox.testcodetutorial.step1.calculator.v2.domain.PositiveOperand;
+import java.util.Arrays;
 
 public class CalculatorV2 implements Calculator {
 
@@ -12,18 +12,11 @@ public class CalculatorV2 implements Calculator {
         int firstPositiveOperand = PositiveOperand.from(firstOperand).value();
         int secondPositiveOperand = PositiveOperand.from(secondOperand).value();
 
-        if ("+".equals(operator)) {
-            return firstPositiveOperand + secondPositiveOperand;
-        } else if ("-".equals(operator)) {
-            return firstPositiveOperand - secondPositiveOperand;
-        } else if ("*".equals(operator)) {
-            return firstPositiveOperand * secondPositiveOperand;
-        } else if ("/".equals(operator)) {
-            validateDivisor(secondPositiveOperand);
-            return firstPositiveOperand / secondPositiveOperand;
-        } else {
-            throw new NotSupportedOperatorException(operator);
-        }
+        return Arrays.stream(Operator.values())
+            .filter(o -> o.getOperatorExpression().equals(operator))
+            .map(o -> o.operate(firstPositiveOperand, secondPositiveOperand))
+            .findFirst()
+            .orElseThrow(() -> new NotSupportedOperatorException(operator));
     }
 
 }

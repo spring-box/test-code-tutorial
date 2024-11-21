@@ -9,27 +9,27 @@ public enum Operator {
 
     ADDITIONAL("+") {
         @Override
-        public int operate(PositiveOperand firstOperand, PositiveOperand secondOperand) {
-            return firstOperand.value() + secondOperand.value();
+        public int operate(int firstOperand, int secondOperand) {
+            return firstOperand + secondOperand;
         }
     },
     MINUS("-") {
         @Override
-        public int operate(PositiveOperand firstOperand, PositiveOperand secondOperand) {
-            return firstOperand.value() - secondOperand.value();
+        public int operate(int firstOperand, int secondOperand) {
+            return firstOperand - secondOperand;
         }
     },
     MULTIPLICATION("*") {
         @Override
-        public int operate(PositiveOperand firstOperand, PositiveOperand secondOperand) {
-            return firstOperand.value() * secondOperand.value();
+        public int operate(int firstOperand, int secondOperand) {
+            return firstOperand * secondOperand;
         }
     },
     DIVIDE("/") {
         @Override
-        public int operate(PositiveOperand firstOperand, PositiveOperand secondOperand) {
-            validateDivisor(secondOperand.value());
-            return firstOperand.value() / secondOperand.value();
+        public int operate(int firstOperand, int secondOperand) {
+            validateDivisor(secondOperand);
+            return firstOperand / secondOperand;
         }
     };
 
@@ -39,5 +39,5 @@ public enum Operator {
         this.operatorExpression = operatorExpression;
     }
 
-    public abstract int operate(PositiveOperand firstOperand, PositiveOperand secondOperand);
+    public abstract int operate(int firstOperand, int secondOperand);
 }

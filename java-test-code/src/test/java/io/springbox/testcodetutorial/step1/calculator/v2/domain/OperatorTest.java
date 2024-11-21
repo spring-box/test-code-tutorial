@@ -13,33 +13,33 @@ import org.junit.jupiter.params.provider.MethodSource;
 class OperatorTest {
 
     private static Stream<Arguments> operate() {
-        final PositiveOperand firstPositiveOperand = PositiveOperand.from(6);
-        final PositiveOperand secondPositiveOperand = PositiveOperand.from(3);
+        final int firstPositiveOperand = PositiveOperand.from(6).value();
+        final int secondPositiveOperand = PositiveOperand.from(3).value();
 
         return Stream.of(
             Arguments.of(
                 Operator.ADDITIONAL,
                 firstPositiveOperand,
                 secondPositiveOperand,
-                firstPositiveOperand.value() + secondPositiveOperand.value()
+                firstPositiveOperand + secondPositiveOperand
             ),
             Arguments.of(
                 Operator.MINUS,
                 firstPositiveOperand,
                 secondPositiveOperand,
-                firstPositiveOperand.value() - secondPositiveOperand.value()
+                firstPositiveOperand - secondPositiveOperand
             ),
             Arguments.of(
                 Operator.MULTIPLICATION,
                 firstPositiveOperand,
                 secondPositiveOperand,
-                firstPositiveOperand.value() * secondPositiveOperand.value()
+                firstPositiveOperand * secondPositiveOperand
             ),
             Arguments.of(
                 Operator.DIVIDE,
                 firstPositiveOperand,
                 secondPositiveOperand,
-                firstPositiveOperand.value() / secondPositiveOperand.value()
+                firstPositiveOperand / secondPositiveOperand
             )
         );
     }
@@ -49,8 +49,8 @@ class OperatorTest {
     @DisplayName("사칙 연산")
     void operate(
         Operator given,
-        PositiveOperand firstPositiveOperand,
-        PositiveOperand secondPositiveOperand,
+        int firstPositiveOperand,
+        int secondPositiveOperand,
         int expected
     ) {
         // When
